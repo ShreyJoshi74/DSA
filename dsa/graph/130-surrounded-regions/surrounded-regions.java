@@ -22,8 +22,8 @@ class Solution {
                 dfs(board,cannotBeVisited,board.length-1,i,visited);
             }
         }
-        for(int i = 1 ; i < board.length ; i++){
-            for (int j = 1 ; j < board[0].length ; j++){
+        for(int i = 1 ; i < board.length-1 ; i++){
+            for (int j = 1 ; j < board[0].length-1 ; j++){
                 if(board[i][j]=='O' && !cannotBeVisited[i][j]){
                     board[i][j] = 'X';
                 }
