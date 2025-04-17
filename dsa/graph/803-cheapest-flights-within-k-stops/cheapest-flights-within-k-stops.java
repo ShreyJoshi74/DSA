@@ -21,7 +21,7 @@ class Solution {
             int stop = temp[0];
             int node = temp[1];
             int cost = temp[2];
-            if(stop > k) break;
+            if(stop > k) continue;
             for(List<Integer> s : adj.get(node)){
                 if(cost + s.get(1) < dist[s.get(0)]){
                     dist[s.get(0)] = cost + s.get(1);
