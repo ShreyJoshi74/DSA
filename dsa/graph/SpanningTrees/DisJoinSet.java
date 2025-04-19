@@ -1,6 +1,7 @@
 // Contains both union by size and rank
 // I personally feel union by size is more intuitive than union by rank
 // you can feel size approach ranther than rank
+// Both are of same timeComplexity no need to worry
 class Disjoint{
     int n;
     int[] rank;
