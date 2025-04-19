@@ -62,14 +62,8 @@ class Solution {
                 availWire++;
             }
         }
-        int hold = 0;
-        for(int i = 0; i < n; i++){
-            if(ds.size[i] > ds.size[hold]){
-                hold = i;
-            }
-        }
+        
         int count = 0;
-        System.out.println(hold);
         for(int i = 0; i < n; i++){
             if(ds.findParent(i) != ds.findParent(0) && availWire > 0){
                 ds.unionBySize(0,i);
