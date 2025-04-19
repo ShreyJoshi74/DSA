@@ -1,3 +1,4 @@
+// User function Template for Java
 class Disjoint{
     int n;
     int[] rank;
@@ -66,6 +67,7 @@ class Solution {
     static int spanningTree(int V, int E, List<List<int[]>> adj) {
         // Code Here.
         List<Edges> edges = new ArrayList<>();
+        // N + E
         for(int i = 0; i < V; i++){
             for(int[] ed : adj.get(i)){
                 Edges temp = new Edges(ed[1],i,ed[0]);
@@ -73,9 +75,12 @@ class Solution {
                 
             }
         }
+        
         Disjoint ds = new Disjoint(V);
+        // M logM
         Collections.sort(edges);
         int mstWt =0;
+        // E * 4 * alpha
         for(Edges temp : edges){
             int weight = temp.wt;
             int u = temp.src;
