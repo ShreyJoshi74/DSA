@@ -1,0 +1,74 @@
+class Disjoint{
+    int n;
+    int[] size;
+    int[] parent;
+    Disjoint(int n){
+        this.n = n;
+        size = new int[n + 1];
+        parent = new int[n + 1];
+        for(int i = 0; i <= n; i++){
+            size[i] = 1;
+            parent[i] = i;
+        }
+        
+    }
+    public int findParent(int u){
+        if(u == parent[u]){
+            return u;
+        }
+        parent[u] = findParent(parent[u]);
+        return parent[u];
+    }
+    public void unionBySize(int u, int v){
+        int ulp_u = findParent(u);
+        int ulp_v = findParent(v);
+        if(ulp_u == ulp_v) return;
+        if(size[ulp_u] < size[ulp_v]){
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+        }else{
+            parent[ulp_v] = parent[ulp_u];
+            size[ulp_u] += size[ulp_v];
+        }
+    }
+}
+class Solution {
+    
+    
+    public List<Integer> numOfIslands(int rows, int cols, int[][] operators) {
+        Disjoint ds = new Disjoint(rows * cols);
+        int[][] directions = {{0,1},{0,-1},{1,0},{-1,0}};
+        int[][] map = new int[rows][cols];
+        for(int i = 0; i < rows ; i++){
+            Arrays.fill(map[i],0);
+        }
+        int islandCount = 0;
+        List<Integer> result = new ArrayList<>();
+        for(int[] cell : operators){
+            int id = cols * cell[0] + cell[1];
+            if(map[cell[0]][cell[1]] == 1) {
+                result.add(islandCount);
+                continue;
+            }
+            map[cell[0]][cell[1]] = 1;
+            islandCount++;
+            for(int[] dir : directions){
+                int nr = cell[0] + dir[0];
+                int nc = cell[1] + dir[1];
+                if(nr >= 0 && nr < rows && nc >= 0 && nc < cols && map[nr][nc] == 1){
+                    int neiId = cols * nr + nc;
+                    if(ds.findParent(id) == ds.findParent(neiId)) continue;
+                    ds.unionBySize(neiId,id);
+                    islandCount--;
+                }
+            }
+            result.add(islandCount);
+        }
+        return result;
+        
+    }
+    
+    
+    
+    
+}
