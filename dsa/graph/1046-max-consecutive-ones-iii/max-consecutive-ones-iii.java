@@ -1,27 +1,24 @@
 class Solution {
     public int longestOnes(int[] nums, int k) {
-        int count = 0;
+        int j = 0;
+        int count  = 0;
         int maxCount = 0;
-        int numZero = 0;
-        Queue<Integer> queue = new LinkedList<>();
         for(int i = 0; i < nums.length; i++){
             if(nums[i] == 1){
-                queue.add(1);
                 count++;
-                maxCount = Math.max(maxCount,count);
+                maxCount = Math.max(count,maxCount);
             }else{
-                if(numZero == k){
-                    queue.add(0);
-                    while(queue.peek() != 0){
-                        queue.poll();
+                if(k > 0){
+                    k--;
+                    count++;
+                    maxCount = Math.max(count,maxCount);
+                }else{
+                    
+                    while(nums[j] != 0){
+                        j++;
                         count--;
                     }
-                    queue.poll();
-                }else{
-                    queue.add(0);
-                    numZero++;
-                    count++;
-                    maxCount = Math.max(maxCount,count);
+                    j++;
                 }
             }
         }
