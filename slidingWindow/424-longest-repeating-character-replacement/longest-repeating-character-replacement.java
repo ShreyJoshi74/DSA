@@ -19,18 +19,12 @@ class Solution {
         Arrays.fill(hash,0);
         for(i = 0; i < s.length(); i++){
             hash[s.charAt(i) - 'A']++;
-            changes = i - j + 1 - maxFreq(hash);
-            if(changes <=k){
-                count++;
-                maxCount = Math.max(maxCount , count);
-            }else{
-                while(i - j + 1 - maxFreq(hash) > k){
-                    hash[s.charAt(j) - 'A']--;
-                    j++;
-                    
-                }
-                count = i - j + 1;
+            while(i - j + 1 - maxFreq(hash) > k){
+                hash[s.charAt(j) - 'A']--;
+                j++;
             }
+            count = i - j + 1;
+            maxCount = Math.max(maxCount,count);
         }
         return maxCount;
     }
