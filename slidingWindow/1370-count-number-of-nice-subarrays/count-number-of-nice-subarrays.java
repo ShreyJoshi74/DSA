@@ -4,7 +4,7 @@ class Solution {
         while( r < nums.length){
             if(k < 0) return 0;
             if(nums[r] % 2 != 0) cnt++;
-            while(cnt > k && j < nums.length){
+            while(cnt > k ){
                 if(nums[j] % 2 != 0) cnt--;
                 j++;
             }
