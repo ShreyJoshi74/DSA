@@ -2,15 +2,10 @@
 // a , b , c ko imagine kro ek potli me bandh liya aur min index a,b,c ki nikalo
 // phir count update kro "min index + 1"
 class Solution {
-    public int min(int a,int b,int c){
-        if (a < b && a < c){
-            return a;
-        }else if(b < a && b < c){
-            return b;
-        }else{
-            return c;
-        }
-    }
+   public int min(int a, int b, int c) {
+    return Math.min(a, Math.min(b, c));
+}
+
     public int numberOfSubstrings(String s) {
         int a = -1,b = -1,c = -1;
         int r  = 0;
