@@ -7,26 +7,25 @@
 class Solution {
     
     public int subArrays(int[] nums,int k){
-        Map<Integer,int[]> map = new HashMap<>();
+        Map<Integer,Integer> map = new HashMap<>();
         int r = 0 ,cnt = 0,j = 0;
         while(r < nums.length){
             if(k < 0) return 0;
             if(map.containsKey(nums[r])){
-                int[] v = map.get(nums[r]);
-                v[0]++;
-                v[1] = r;
-                map.put(nums[r],v);
+                map.put(nums[r],map.get(nums[r])+1);
+                
             }else{
-                map.put(nums[r],new int[]{1,r});
+                map.put(nums[r],1);
 
             }
             while(map.keySet().size() > k){
-                int[] temp = map.get(nums[j]);
-                if(temp[0] == 1){
+                int temp = map.get(nums[j]);
+                if(temp == 1){
                     map.remove(nums[j]);
                     
                 }else{
-                    temp[0]--;
+                    temp--;
+                    map.put(nums[j],temp);
                 }
                 j++;
 
