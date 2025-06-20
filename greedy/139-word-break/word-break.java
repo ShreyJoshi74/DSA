@@ -8,7 +8,7 @@ class Solution {
             String t = s.substring(i,j+1);
             if(wordDict.contains(t)){
                 k = segment(j+1,wordDict,s,done);
-                System.out.println(t);
+               
                 if(k) {
                     done[i] = true;
                     return true;
