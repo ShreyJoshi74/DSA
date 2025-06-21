@@ -4,10 +4,10 @@ class Solution {
         if(count < 0) return 0;
         if(ways[count] != -1) return ways[count];
         int w1 = func(ways,count-1);
-        if(count -1 > -1) ways[count-1] = w1;
+        
         int w2 = func(ways,count-2);
-        if(count -2 >-1 )ways[count-2] = w2;
-        return w1 + w2;
+        
+        return ways[count] = w1 + w2;
        
 
     }
