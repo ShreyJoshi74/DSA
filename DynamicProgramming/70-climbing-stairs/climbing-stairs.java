@@ -20,14 +20,16 @@ class Solution {
     // }
     // TRYING WITH TABULAR FORMAT
     public int climbStairs(int n){
-        int[] dp = new int[n+1];
-        dp[0]= -1;
-        dp[1] = 1;
-        if(n > 1) dp[2] =  2;
-        if(n <= 2) return dp[n];
+        int prev2= 1;
+        int prev1 = 2;
+        if(n == 1) return prev2;
+        if(n == 2) return prev1;
+        int curr = 0;
         for(int i = 3 ; i <= n; i++){
-            dp[i] = dp[i-1] + dp[i-2];
+            curr = prev1 + prev2;
+            prev2= prev1;
+            prev1 = curr;
         }
-        return dp[n];
+        return prev1;
     }
 }
