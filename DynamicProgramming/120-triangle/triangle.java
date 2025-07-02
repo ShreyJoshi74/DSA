@@ -10,7 +10,13 @@ class Solution {
 
     }
     public int f(int day,int path,List<List<Integer>> triangle,int[][] dp){
-        if(day >= triangle.size()) return 0;
+        if(day == triangle.size()-1){
+            int x = triangle.get(day).get(path);
+           
+            return x;
+        }
+
+        
         if(dp[day][path] != -1) return dp[day][path];
         int min = Integer.MAX_VALUE;
         min = Math.min(min,triangle.get(day).get(path) + f(day + 1,path,triangle,dp));
