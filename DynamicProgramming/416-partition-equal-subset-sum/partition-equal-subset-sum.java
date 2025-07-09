@@ -14,8 +14,8 @@ class Solution {
         if(nums[i] <= right){
             taken = f(nums,right - nums[i],i-1,dp);
         }
-        dp[i][right] = notTaken || taken;
-        return notTaken || taken;
+        return dp[i][right] = notTaken || taken;
+        
     }
     public boolean canPartition(int[] nums) {
         int sum = 0;
