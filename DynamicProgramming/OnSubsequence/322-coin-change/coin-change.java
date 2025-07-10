@@ -1,23 +1,28 @@
 class Solution {
-    
+    public int f(int ind,int T,int[] coins,int[][] dp){
+        if(T == 0) return 0;
+
+        if(ind == 0){
+            if(T % coins[0] == 0) return T/coins[0];
+            else return (int)1e9;
+        }
+        if(dp[ind][T] != -1) return dp[ind][T];
+        int notTaken = f(ind - 1,T,coins,dp);
+        int taken = (int) 1e9;
+        if(coins[ind] <= T){
+            taken = 1 + f(ind,T - coins[ind],coins,dp);
+        }
+        return dp[ind][T] = Math.min(notTaken,taken);
+
+    }
     public int coinChange(int[] coins, int amount) {
-       PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> Integer.compare(a[1],b[1]));
-       pq.add(new int[] {0,0});
-       int[] totalSikke = new int[amount+1];
-       Arrays.fill(totalSikke,Integer.MAX_VALUE);
-        totalSikke[0] = 0;
-       while(!pq.isEmpty()){
-            int[] temp = pq.poll();
-            int sum = temp[0];
-            int sikke = temp[1];
-            for(int rupay : coins){
-                long next =(long) sum + rupay;
-                if(next <= amount && sikke + 1 < totalSikke[(int)next]){
-                    totalSikke[(int)next] = sikke + 1;
-                    pq.add(new int[]{(int)next,sikke + 1});
-                }
-            }
-       }
-       return (totalSikke[amount] != Integer.MAX_VALUE) ? totalSikke[amount] : -1;
-    }   
+        
+        int[][] dp = new int[coins.length][amount + 1];
+        
+        for(int i = 0; i < coins.length;i++){
+            Arrays.fill(dp[i],-1);
+        }
+        int out = f(coins.length -1,amount,coins,dp);
+        return (out >= 1e9) ? -1 : out;
+    }
 }
