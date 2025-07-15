@@ -1,44 +1,33 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
-        int n = nums.length;
-        int[] dp = new int[n];
-        int[] hash = new int[n];
-
-        // Initialization
-        for (int i = 0; i < n; i++) {
+        int[] dp = new int[nums.length];
+        int[] hash = new int[nums.length];
+        for(int i  =0 ; i < nums.length; i++){
             dp[i] = 1;
-            hash[i] = i; // initially point to itself
+            hash[i] = i;
         }
-
-        int maxLen = 1;
+        if(nums.length == 1) return 1;
+        int max = 1;
         int lastIndex = 0;
-
-        // Fill dp and hash arrays
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j] && dp[i] < dp[j] + 1) {
+        for(int i = 0; i <nums.length; i++){
+            for(int j = 0; j < i ; j++){
+                if(nums[i] > nums[j] && dp[i] < dp[j] + 1){
                     dp[i] = dp[j] + 1;
                     hash[i] = j;
                 }
             }
-            if (dp[i] > maxLen) {
-                maxLen = dp[i];
+            if(dp[i] > max) {
+                max = dp[i];
                 lastIndex = i;
             }
-        }
 
-        // Reconstruct the sequence
-        ArrayList<Integer> lis = new ArrayList<>();
-        lis.add(nums[lastIndex]);
-        while (hash[lastIndex] != lastIndex) {
+        }
+       
+        while(hash[lastIndex] != lastIndex){
+            System.out.print(nums[lastIndex] + " ");
             lastIndex = hash[lastIndex];
-            lis.add(nums[lastIndex]);
         }
-
-        // Print in correct order
-        Collections.reverse(lis);
-        System.out.println("LIS: " + lis);
-
-        return maxLen;
+        System.out.println(nums[lastIndex]);
+        return max;
     }
 }
