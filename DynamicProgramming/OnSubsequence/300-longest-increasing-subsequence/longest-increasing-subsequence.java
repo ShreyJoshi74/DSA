@@ -1,27 +1,14 @@
 class Solution {
-    public int giveposi(ArrayList<Integer> ls,int number){
-        int i = 0,j = ls.size();
-        while(i < j){
-           int  m = i + (j - i)/2;
-            if(ls.get(m) < number){
-                i = m + 1;
-            }else{
-                j = m;
-            }
-        }
-        return i;
-    }
-    
     public int lengthOfLIS(int[] nums) {
-        ArrayList<Integer> ls = new ArrayList<>();
-        for(int k : nums){
-            int p = giveposi(ls,k);
-            if( p == ls.size()) ls.add(k);
-            else{
-                ls.set(p,k);
+        int[][] dp = new int[nums.length + 1][nums.length + 1];
+        for(int i = nums.length -1; i >= 0; i--){
+            for(int j = i - 1; j >= -1; j--){
+                int len = 0 + dp[i+1][j+1];
+                if(j == -1 || nums[i] > nums[j]) len = Math.max(len , 1 + dp[i + 1][i + 1]);
+                dp[i][j+1] = len;
             }
         }
-        return ls.size();
-        
+    return dp[0][0];
     }
+
 }
