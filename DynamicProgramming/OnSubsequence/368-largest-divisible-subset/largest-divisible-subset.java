@@ -23,10 +23,11 @@ class Solution {
         }
         List<Integer> ls = new ArrayList<>();
         while(hash[lastElement] != lastElement){
-            ls.add(0,nums[lastElement]);
+            ls.add(nums[lastElement]);
             lastElement = hash[lastElement];
         }
-        ls.add(0,nums[lastElement]);
+        ls.add(nums[lastElement]);
+        Collections.reverse(ls);
         return ls;
     }
 }
