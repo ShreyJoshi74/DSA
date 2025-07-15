@@ -1,5 +1,5 @@
 class Solution {
-    public boolean isPred(String a,String b){
+    public boolean isPred(String a,String b){ // checking if both a is pred of b
         int x = a.length();
         int y = b.length();
         if(y - x != 1 ) return false;
@@ -19,7 +19,7 @@ class Solution {
     }
     public int longestStrChain(String[] words) {
         if (words.length ==1) return 1;
-        Arrays.sort(words,new Comparator<String>(){
+        Arrays.sort(words,new Comparator<String>(){   // sorting first so that length is always increasing and if same lengthn than lexographically
             public int compare(String s1,String s2){
                 int a = s1.length();
                 int b = s2.length();
@@ -34,7 +34,7 @@ class Solution {
             
         }
         int max = 0;
-        for(int i = 0; i < words.length; i++){
+        for(int i = 0; i < words.length; i++){   // if you dont understand this chec striver's lis with tabulation 
             for(int j = 0 ; j < i; j++){
                 if(words[i].length() - words[j].length() != 1) continue;
                 else{
