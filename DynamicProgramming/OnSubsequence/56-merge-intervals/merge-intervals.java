@@ -5,15 +5,22 @@ class Solution {
         ArrayList<int[]> ls = new ArrayList<>();
         Arrays.sort(intervals,(a,b) -> Integer.compare(a[0],b[0]));
         ls.add(intervals[0]);
+        int[] prev = ls.get(0);
         for(int[] temp : intervals){
             int l = temp[0];
             int h = temp[1];
-            int[] prev = ls.get(ls.size()-1);
-            if(l > prev[1]) ls.add(new int[]{l,h});
+            
+            if(l > prev[1]) {
+                int[] next = new int[]{l,h};
+                ls.add(next);
+                prev = next;
+            }
             else{
                 if(h > prev[1]){
                     ls.remove(ls.size()-1);
-                    ls.add(new int[]{ Math.min(l,prev[0]),h});
+                    int[] next = new int[]{ Math.min(l,prev[0]),h};
+                    ls.add(next);
+                    prev = next;
                 }
             }
             
