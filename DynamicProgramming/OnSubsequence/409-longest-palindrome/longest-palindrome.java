@@ -8,7 +8,7 @@ class Solution {
             if(map.get(c) % 2 == 0) odd--;
             else odd++;
         }
-        System.out.println(odd);
-        return (odd > 0) ? s.length() - odd  + 1: s.length();
+
+        return (odd != 0) ? s.length() - odd  + 1 : s.length();
     }
 }
