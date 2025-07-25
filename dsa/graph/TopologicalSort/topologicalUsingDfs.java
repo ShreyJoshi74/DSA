@@ -1,32 +1,30 @@
 class Solution {
-    public static ArrayList<Integer> topoSort(int V, int[][] edges) {
-         List<List<Integer>> adj = new ArrayList<>();
-         for(int i = 0; i < V; i++){
-             adj.add(new ArrayList<>());
-         }
-         for(int[] ed : edges){
-             adj.get(ed[0]).add(ed[1]);
-         }
-         boolean[] visited = new boolean[V];
-         Stack<Integer> stack = new Stack<>();
-         for(int i = 0 ; i < V; i++){
-             if(!visited[i]){
-                 dfs(i,stack,visited,adj);
-             }
-         }
-         ArrayList<Integer> output = new ArrayList<>();
-         while(!stack.isEmpty()){
-             output.add(stack.pop());
-         }
-         return output;
-    }
-    public static void dfs(int vertex,Stack<Integer> stack,boolean[] visited,List<List<Integer>> adj){
-        visited[vertex] = true;
-        for(int s : adj.get(vertex)){
-            if(!visited[s]){
-                dfs(s,stack,visited,adj);
-            }
+    static boolean[] vis ;
+    public static void dfs(ArrayList<ArrayList<Integer>> adj,Stack<Integer> stack,int node){
+        vis[node] = true;
+        for(int temp : adj.get(node)){
+            if(!vis[temp]) dfs(adj,stack,temp);
         }
-        stack.push(vertex);
+        stack.push(node);
+        return;
+        
+    }
+    public static ArrayList<Integer> topoSort(int V, int[][] edges) {
+        // code here
+        vis = new boolean[V];
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for(int i = 0; i < V; i++) adj.add(new ArrayList<>());
+        for(int[] t : edges){
+            adj.get(t[0]).add(t[1]);
+        }
+        Stack<Integer> stack = new Stack<>();
+        for(int i = 0; i < V; i++){
+            if(!vis[i]) dfs(adj,stack,i);
+        }
+        ArrayList<Integer> output = new ArrayList<>();
+        while(!stack.isEmpty()) output.add(stack.pop());
+        return output;
+        
+        
     }
 }
