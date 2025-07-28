@@ -13,11 +13,11 @@ class Solution {
             int mul;
             if(stack.isEmpty()) {
                 mul = curr + 1;
-                dp[curr] = (arr[curr] * mul)  % (int) (1e9 + 7);
+                dp[curr] = (arr[curr] * mul)  ;
             }
             else {
                 mul = curr - stack.peek() ;
-                dp[curr] = (arr[curr] * mul + dp[stack.peek()] )% (int) (1e9 + 7);
+                dp[curr] = (arr[curr] * mul + dp[stack.peek()] );
             }
 
             
