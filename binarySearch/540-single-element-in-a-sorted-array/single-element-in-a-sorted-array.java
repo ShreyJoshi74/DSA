@@ -8,13 +8,8 @@ class Solution {
         while(l <= h){
             mid = (l + h)/2;
             if(arr[mid-1] != arr[mid] && arr[mid+1] != arr[mid] ) return arr[mid];
-            if(mid % 2 == 0){
-                if(arr[mid] == arr[mid+1]) l = mid + 2;
-                else h = mid - 1;
-            }else{
-                if(arr[mid + 1] == arr[mid]) h = mid - 1;
-                else l = mid + 1;
-            }
+            if(mid % 2 == 0 && arr[mid] == arr[mid + 1] || mid % 2 == 1 && arr[mid] == arr[mid - 1]) l = mid + 1;
+            else h = mid - 1;
         }
         return -1;
     }
