@@ -36,8 +36,7 @@ class Solution {
         ListNode tail = reverseList(slow.next);
         slow.next = null;
         while(head != null && tail != null){
-            System.out.println(head.val);
-            System.out.println(tail.val);
+            
             if(head.val != tail.val) return false;
             head = head.next;
             tail = tail.next;
