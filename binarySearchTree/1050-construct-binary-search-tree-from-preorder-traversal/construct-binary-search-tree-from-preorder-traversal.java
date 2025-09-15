@@ -14,30 +14,15 @@
  * }
  */
 class Solution {
-    public TreeNode bstFromPreorder(int[] arr) {
-        Stack<TreeNode> st = new Stack<>();
-        if(arr.length == 1) return new TreeNode(arr[0]);
-        TreeNode mainRoot = new TreeNode(arr[0]);
-        TreeNode currRoot = mainRoot;
-        int i = 1;
-        while(i < arr.length && (!st.isEmpty() || currRoot != null)){
-            while(i < arr.length && arr[i] < arr[i - 1]){
-                TreeNode tempRoot = new TreeNode(arr[i]);
-                currRoot.left = tempRoot;
-                st.push(currRoot);
-                currRoot = tempRoot;
-                i++;
-            }
-            if(i >= arr.length) break;
-            while(!st.isEmpty() && st.peek().val < arr[i]){
-                currRoot = st.pop();
-            }
-            TreeNode temp = new TreeNode(arr[i]);
-            i++;
-            currRoot.right = temp;
-            currRoot = currRoot.right;
-        }
-        return mainRoot;
+    public TreeNode bstFromPreorder(int[] preorder) {
+        return insert(preorder,Integer.MAX_VALUE,new int[1]);
+    }
+    public TreeNode insert(int[] preorder,int bound, int[] i){
+        if(i[0] == preorder.length || preorder[i[0]] > bound) return null;
 
+        TreeNode root = new TreeNode(preorder[i[0]++]);
+        root.left = insert(preorder,root.val,i);   
+        root.right = insert(preorder,bound,i);   
+        return root;
     }
 }
