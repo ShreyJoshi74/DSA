@@ -14,28 +14,50 @@
  * }
  */
 class Solution {
-    public boolean findTarget(TreeNode root, int k) {
-        Stack<TreeNode> st = new Stack<>();
-        ArrayList<Integer> ls =new ArrayList<>();
-        while(root != null || !st.isEmpty()){
-            while(root != null){
-                st.push(root);
-                root = root.left;
-            }
-            root = st.pop();
-            ls.add(root.val);
+
+    private Stack<TreeNode> stackBefore = new Stack<>();
+    private Stack<TreeNode> stackNext = new Stack<>();
+
+    public void pushAllForBefore(TreeNode root){
+        while(root != null){
+            this.stackBefore.push(root);
             root = root.right;
         }
-        int i = 0;
-        int j = ls.size()-1;
-        while(i < j){
-            int a = ls.get(i);
-            int b = ls.get(j);
-            if(a + b == k) return true;
-            if(a + b < k) i++;
-            else j--; 
+    }
+
+    public void pushAllForNext(TreeNode root){
+        while(root != null){
+            this.stackNext.push(root);
+            root = root.left;
         }
+    }
+
+    public TreeNode next(){
+        TreeNode temp = stackNext.pop();
+        pushAllForNext(temp.right);
+        return temp;
+    }
+
+    public TreeNode before(){
+        TreeNode temp = stackBefore.pop();
+        pushAllForBefore(temp.left);
+        return temp;
+    }
+    public boolean findTarget(TreeNode root, int k) {
+        if(root == null) return false;
+        pushAllForNext(root);
+        pushAllForBefore(root);
+        TreeNode left = next();
+        TreeNode right = before();
+
+        while(left != right){
+            if(left.val + right.val == k) return true;
+
+            if(left.val + right.val < k) left = next();
+            else right = before();
+        }
+
         return false;
-        
+
     }
 }
