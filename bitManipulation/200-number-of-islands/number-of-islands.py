@@ -12,7 +12,7 @@ class Solution:
         cnt  = 0
         for i in range(len(grid)):
             for j in range(len(grid[0])):
-                print(f'{i} , {j}')
+               
                 
                 if(grid[i][j] == "1"):
                     cnt += 1
