@@ -14,13 +14,16 @@
  * }
  */
 class Solution {
-    public int f(TreeNode root, String number){
+    public int f(TreeNode root, int number){
         if(root == null) return 0;
-        if(root.left == null && root.right == null){
-            String currentValue = number+root.val;
-            return Integer.parseInt(currentValue);
+        if(root.left == null && root.right == null) {
+            if(number == -1) return root.val;
+            int currentValue = number * 10 + root.val;
+            return currentValue;
         }
-        String currentValue = number + root.val;
+        int currentValue;
+        if(number == -1) currentValue = root.val;
+        else currentValue = number * 10 + root.val;
         int left = 0;
         int right = 0;
         if(root.left != null) left = f(root.left,currentValue);
@@ -28,6 +31,6 @@ class Solution {
         return left + right;
     }
     public int sumNumbers(TreeNode root) {
-        return f(root,"");
+        return f(root,-1);
     }
 }
