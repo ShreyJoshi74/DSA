@@ -19,7 +19,7 @@ class Solution {
                 }else break;
             }
             stack.push(current);
-            System.out.println(current);
+            
         }
         return count;
     }
