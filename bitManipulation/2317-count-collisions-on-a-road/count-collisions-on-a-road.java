@@ -1,25 +1,13 @@
 class Solution {
     public int countCollisions(String directions) {
         int count = 0;
-        Stack<Character> stack = new Stack<>();
-        for(int i = 0; i < directions.length(); i++){
-            char current = directions.charAt(i);
-            while(!stack.isEmpty()){
-                if(current == 'S' && stack.peek() == 'R'){
-                    stack.pop();
-                    count++;
-                }else if(current == 'L' && stack.peek() == 'R'){
-                    count += 2;
-                    stack.pop();
-                    current = 'S';
-                }else if(current == 'L' && stack.peek() == 'S'){
-                    count++;
-                    stack.pop();
-                    current = 'S';
-                }else break;
-            }
-            stack.push(current);
-            
+        int i = 0;
+        int k = directions.length();
+        while(i < k && directions.charAt(i) == 'L') i++;
+        int j = directions.length() -1;
+        while(j >= 0 && directions.charAt(j) == 'R') j--;
+        for(;i <= j; i++){
+            if(directions.charAt(i) != 'S') count++;
         }
         return count;
     }
