@@ -5,7 +5,7 @@ class Solution {
         long permutation = 1;
         for(int i = 1; i < complexity.length; i++){
             if(complexity[i] <= min) return 0;
-            permutation =( permutation * (complexity.length - i) % MOD) % MOD;
+            permutation =( permutation * i ) % MOD;
         }
         return (int) permutation;
     }
