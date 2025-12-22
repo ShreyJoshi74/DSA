@@ -26,10 +26,11 @@ class Solution {
         int ans = 0;
         String s = boss;
         int split = word1.length();
+        func(boss, 0 , n-1);
          for (int i = 0; i < split; i++) {
             for (int j = split; j < n; j++) {
                 if (s.charAt(i) == s.charAt(j)) {
-                    ans = Math.max(ans, 2 + func(boss,i + 1, j - 1));
+                    ans = Math.max(ans, dp[i][j]);
                 }
             }
         }
