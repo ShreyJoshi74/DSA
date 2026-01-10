@@ -30,7 +30,7 @@ class Solution {
         return dp[i][j] = Math.min(take,Math.min(iNhi,jNhi));
     }
     public int minimumDeleteSum(String s1, String s2) {
-        int[][] dp = new int[s1.length() + 1][s2.length() + 1];
+        //int[][] dp = new int[s1.length() + 1][s2.length() + 1];
         // for(int i = 0; i < s1.length(); i++){
         //     Arrays.fill(dp[i],-1);
         // }
@@ -38,32 +38,31 @@ class Solution {
 
         // trying bottom up approach
 
-        int lenS1 = s1.length();
-        int lenS2 = s2.length();
-        dp[lenS1][lenS2] = 0;
+    
+        int n = s1.length(), m = s2.length();
+        int[][] dp = new int[n + 1][m + 1];
 
-        int rem = 0;
-        for(int j = lenS2 - 1; j >= 0; j--){
-            rem += (int) s2.charAt(j);
-            dp[lenS1][j] = rem;
-        }
+        for (int i = n - 1; i >= 0; i--)
+            dp[i][m] = dp[i + 1][m] + s1.charAt(i);
 
-        rem = 0;
-        for(int i = lenS1 - 1; i >= 0; i--){
-            rem += (int) s1.charAt(i);
-            dp[i][lenS2] = rem;
-        }
+        for (int j = m - 1; j >= 0; j--)
+            dp[n][j] = dp[n][j + 1] + s2.charAt(j);
 
-        for(int i = lenS1 - 1; i >= 0; i--){
-            for(int j = lenS2 - 1; j>=0; j--){
-                int take = Integer.MAX_VALUE;
-                if(s1.charAt(i) == s2.charAt(j)) take = dp[i+1][j+1];
-                dp[i][j] = Math.min(s1.charAt(i) + dp[i+1][j],
-                                Math.min(s2.charAt(j) + dp[i][j+1], take)
-                            );
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = m - 1; j >= 0; j--) {
+                if (s1.charAt(i) == s2.charAt(j)) {
+                    dp[i][j] = dp[i + 1][j + 1];
+                } else {
+                    dp[i][j] = Math.min(
+                        s1.charAt(i) + dp[i + 1][j],
+                        s2.charAt(j) + dp[i][j + 1]
+                    );
+                }
             }
         }
         return dp[0][0];
+
+
 
 
 
