@@ -1,6 +1,6 @@
 class Solution {
     public int func(int i, int j, String s1, String s2, int[][] dp){
-        if(i >= s1.length() && j >= s2.length())   
+        if(i == s1.length() && j == s2.length())   
             return 0;
         if(i >= s1.length()){
             int rem = 0;
@@ -30,10 +30,12 @@ class Solution {
         return dp[i][j] = Math.min(take,Math.min(iNhi,jNhi));
     }
     public int minimumDeleteSum(String s1, String s2) {
-        int[][] dp = new int[s1.length()][s2.length()];
+        int[][] dp = new int[s1.length() + 1][s2.length() + 1];
         for(int i = 0; i < s1.length(); i++){
             Arrays.fill(dp[i],-1);
         }
         return func(0,0,s1,s2,dp);
+        // trying bottom up approach
+
     }
 }
