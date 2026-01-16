@@ -1,5 +1,5 @@
 class Solution {
-    int MOD = 1_000_000_007;
+    int MOD = 1000000007;
     public int maximizeSquareArea(int m, int n, int[] hFences, int[] vFences) {
         Set<Integer> vSet = giveAllPossible(vFences,n);
         Set<Integer> hSet = giveAllPossible(hFences,m);
