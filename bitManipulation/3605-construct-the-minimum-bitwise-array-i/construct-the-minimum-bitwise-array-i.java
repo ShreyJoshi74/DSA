@@ -1,17 +1,18 @@
 class Solution {
-    public int findMin(int num){
-        for(int i = 0; i <= num; i++){
-            int y = (i | (i + 1));
-            if(y == num)
-                return i;
-        }
-        return -1;
-    }
+
     public int[] minBitwiseArray(List<Integer> nums) {
-        int[] output = new int[nums.size()];
-        for(int i = 0; i < nums.size(); i++)
-            output[i] = findMin(nums.get(i));
-            
-        return output;
+        int n = nums.size();
+        int[] result = new int[n];
+        for (int i = 0; i < n; i++) {
+            int x = nums.get(i);
+            int res = -1;
+            int d = 1;
+            while ((x & d) != 0) {
+                res = x - d;
+                d <<= 1;
+            }
+            result[i] = res;
+        }
+        return result;
     }
 }
