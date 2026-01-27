@@ -31,7 +31,8 @@ class Solution {
             int node = temp[0];
             int count = temp[1];
             // for safety
-            
+            if(count < dis[node])
+                continue;
             
             for(int[] nextPath : adj.get(node)){
                 int nextNode = nextPath[0];
